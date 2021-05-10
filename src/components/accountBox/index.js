@@ -13,3 +13,13 @@ box-shadow: 0 0 2px rgba(15, 15, 15, 0.20);
 position: relative;
 overflow: hidden;
 `
+
+const BackDrop = styled. div`
+  width: 160%;
+  height: 550px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50%;
+`;
+
