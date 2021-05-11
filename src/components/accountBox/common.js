@@ -18,6 +18,7 @@ export const FormContainer = styled.form`
 
 
 export const MutedLink = styled.a`
+  z-index: 11;
   font-size: 11px;
   color: rgba(200, 200, 200, 0.8);
   font-weight: 500;
@@ -26,6 +27,7 @@ export const MutedLink = styled.a`
 
 
 export const BoldLink = styled.a`
+  z-index: 11;
   font-size: 11px;
   color: #2a2a72;
   font-weight: 500;
@@ -35,13 +37,15 @@ export const BoldLink = styled.a`
 
 
 export const Input = styled.input`
+z-index: 11;
   width: 100%;
   height: 42px;
   outline: none;
   border: 1px solid rgba(200, 200, 200, 0.3);
   padding: 0px 10px;
   border-bottom: 1.4px solid transparent;
-  transition: all 200ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  transform-origin:left;
   font-size: 12px;
   &::placeholder {
     color: rgba(200, 200, 200, 1);
@@ -56,6 +60,7 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button`
+z-index:11;
   width: 100%;
   padding: 11px 40%;
   color: #fff;
@@ -65,8 +70,11 @@ export const SubmitButton = styled.button`
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
   transition: all, 240ms ease-in-out;
-  background-color: #2a2a72;
-  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+background-color: #2a2a72;
+    background-image: linear-gradient(
+315deg
+,#2a2a72 0%,#08679f);
+
   &:hover {
     filter: brightness(1.03);
   }
