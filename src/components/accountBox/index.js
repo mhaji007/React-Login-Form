@@ -26,8 +26,8 @@ const TopContainer = styled.div`
 `;
 
 const BackDrop = styled.div`
-  width: 160%;
-  height: 510px;
+  width: 173%;
+  height: 535px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -57,19 +57,26 @@ const HeaderText = styled.h2`
   margin: 0;
 `;
 
+
+const SmallText = styled.h5`
+  color: #fff;
+  font-weight: 500;
+  font-size: 12px;
+  /* z-index: 10; */
+  margin: 0;
+  margin-top: 7px;
+`;
+
 export function AccountBox(props) {
   return (
     <BoxContainer>
       <TopContainer>
         <BackDrop />
         <HeaderContainer>
-          <HeaderText>
-            Welcome
-          </HeaderText>
-          <HeaderText>
-            Back
-          </HeaderText>
-          </HeaderContainer>
+          <HeaderText>Welcome</HeaderText>
+          <HeaderText>Back</HeaderText>
+          <SmallText>Please sign-in to continue!</SmallText>
+        </HeaderContainer>
       </TopContainer>
     </BoxContainer>
   );
