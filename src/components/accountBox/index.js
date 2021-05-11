@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { LoginForm } from "./loginForm";
 import {motion} from "framer-motion";
+import { RegisterForm } from "./registerForm";
 
 
 import styled from "styled-components";
@@ -79,16 +80,16 @@ const InnerContainer = styled.div`
 `;
 const backdropVariants = {
   expanded: {
-    width: "233%",
+    width: "263%",
     height: "1050px",
     borderRadius: "20%",
     transform: "rotate(60deg)",
   },
   collapsed: {
-    width: "160%",
-    height: "550px",
-    borderRadius: "50%",
-    transform: "rotate(60deg)",
+  width: "173%",
+  height: "535px",
+  borderTadius: "50%",
+  transform: "rotate(59deg)",
   },
 };
 
@@ -101,10 +102,26 @@ const expandingTransition = {
 
 export function AccountBox(props) {
   const [isExpanded, setExpanded] = useState(false)
+
+    const playExpandingAnimation = () => {
+      setExpanded(true);
+      setTimeout(() => {
+        setExpanded(false);
+      }, expandingTransition.duration*1000-1500);
+    };
+
+
+
+
   return (
     <BoxContainer>
       <TopContainer>
-        <BackDrop />
+        <BackDrop
+          initial={false}
+          animate={isExpanded ? "expanded" : "collapsed"}
+          variants={backdropVariants}
+          transition={expandingTransition}
+        />
         <HeaderContainer>
           <HeaderText>Welcome</HeaderText>
           <HeaderText>Back</HeaderText>
@@ -112,7 +129,8 @@ export function AccountBox(props) {
         </HeaderContainer>
       </TopContainer>
       <InnerContainer>
-        <LoginForm/>
+        <LoginForm />
+        <p style={{zIndex:"20"}} onClick={playExpandingAnimation}>Click me 👌 </p>
       </InnerContainer>
     </BoxContainer>
   );
