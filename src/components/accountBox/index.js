@@ -39,11 +39,37 @@ const BackDrop = styled.div`
   background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
 `;
 
+const HeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  position: absolute;
+  top:40px;
+  bottom:40px;
+  flex-direction: column;
+`;
+
+const HeaderText = styled.h2`
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.24;
+  color: #fff;
+  z-index: 10;
+  margin: 0;
+`;
+
 export function AccountBox(props) {
   return (
     <BoxContainer>
       <TopContainer>
         <BackDrop />
+        <HeaderContainer>
+          <HeaderText>
+            Welcome
+          </HeaderText>
+          <HeaderText>
+            Back
+          </HeaderText>
+          </HeaderContainer>
       </TopContainer>
     </BoxContainer>
   );

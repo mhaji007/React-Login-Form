@@ -12,7 +12,7 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-return <AppContainer> <AccountBox/> </AppContainer>
+return <AppContainer> <AccountBox/></AppContainer>
 }
 
 export default App;
