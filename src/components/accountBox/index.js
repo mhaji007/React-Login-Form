@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { LoginForm } from "./loginForm";
+import {motion} from "framer-motion";
+
 
 import styled from "styled-components";
 
@@ -26,7 +28,7 @@ const TopContainer = styled.div`
   padding-bottom: 5em;
 `;
 
-const BackDrop = styled.div`
+const BackDrop = styled(motion.div)`
   width: 173%;
   height: 535px;
   position: absolute;
@@ -75,8 +77,30 @@ const InnerContainer = styled.div`
   flex-direction: column;
   padding: 0 1.8em;
 `;
+const backdropVariants = {
+  expanded: {
+    width: "233%",
+    height: "1050px",
+    borderRadius: "20%",
+    transform: "rotate(60deg)",
+  },
+  collapsed: {
+    width: "160%",
+    height: "550px",
+    borderRadius: "50%",
+    transform: "rotate(60deg)",
+  },
+};
+
+const expandingTransition = {
+  type: "spring",
+  duration: 2.3,
+  stiffness: 30,
+};
+
 
 export function AccountBox(props) {
+  const [isExpanded, setExpanded] = useState(false)
   return (
     <BoxContainer>
       <TopContainer>
