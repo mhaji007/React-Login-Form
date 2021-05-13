@@ -8,10 +8,10 @@ import {
   SubmitButton,
 } from "./common";
 import { Marginer } from "../marginer";
-// import { AccountContext } from "./accountContext";
+import { AccountContext } from "./accountContext";
 
 export function RegisterForm(props) {
-  // const { switchToSignup } = useContext(AccountContext);
+  const { switchToLogin } = useContext(AccountContext);
 
   return (
     <BoxContainer>
@@ -25,7 +25,7 @@ export function RegisterForm(props) {
       <SubmitButton type="submit">Register</SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="#">
-        Already have an account? <BoldLink href="#">Login</BoldLink>
+        Already have an account? <BoldLink href="#" onClick={switchToLogin}>Login</BoldLink>
       </MutedLink>
     </BoxContainer>
   );

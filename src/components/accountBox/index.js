@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { LoginForm } from "./loginForm";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
+import { AccountContext } from "./accountContext";
 import { RegisterForm } from "./registerForm";
-
 
 import styled from "styled-components";
 
@@ -40,20 +40,19 @@ const BackDrop = styled(motion.div)`
   top: -290px;
   left: -70px;
   background-color: #2a2a72;
-  background-image:  linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
-
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
 `;
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   position: absolute;
-  top:40px;
-  bottom:40px;
+  top: 40px;
+  bottom: 40px;
   flex-direction: column;
 `;
 
-const HeaderText = styled.h2`
+export const HeaderText = styled.h2`
   font-size: 30px;
   font-weight: 600;
   line-height: 1.24;
@@ -62,8 +61,7 @@ const HeaderText = styled.h2`
   margin: 0;
 `;
 
-
-const SmallText = styled.h5`
+export const SmallText = styled.h5`
   color: #fff;
   font-weight: 500;
   font-size: 12px;
@@ -86,10 +84,10 @@ const backdropVariants = {
     transform: "rotate(60deg)",
   },
   collapsed: {
-  width: "173%",
-  height: "535px",
-  borderTadius: "50%",
-  transform: "rotate(59deg)",
+    width: "173%",
+    height: "535px",
+    borderTadius: "50%",
+    transform: "rotate(59deg)",
   },
 };
 
@@ -97,41 +95,68 @@ const expandingTransition = {
   type: "spring",
   duration: 2.3,
   stiffness: 30,
+  //  higher mass moves slower
+  // mass:1,
+  // strength of the opposing force. higher number means less oscillation
+  // damping:8,
+  // yoyo:Infinity,
 };
 
-
 export function AccountBox(props) {
-  const [isExpanded, setExpanded] = useState(false)
+  const [isExpanded, setExpanded] = useState(false);
+  const [active, setActive] = useState("login");
 
-    const playExpandingAnimation = () => {
-      setExpanded(true);
-      setTimeout(() => {
-        setExpanded(false);
-      }, expandingTransition.duration*1000-1500);
-    };
+  const playExpandingAnimation = () => {
+    setExpanded(true);
+    setTimeout(() => {
+      setExpanded(false);
+    }, expandingTransition.duration * 1000 - 1500);
+  };
+  const switchToRegister = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("register");
+    }, 400);
+  };
 
-
-
+  const switchToLogin = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("login");
+    }, 400);
+  };
+  const contextValue = { switchToRegister, switchToLogin };
 
   return (
-    <BoxContainer>
-      <TopContainer>
-        <BackDrop
-          initial={false}
-          animate={isExpanded ? "expanded" : "collapsed"}
-          variants={backdropVariants}
-          transition={expandingTransition}
-        />
-        <HeaderContainer>
-          <HeaderText>Welcome</HeaderText>
-          <HeaderText>Back</HeaderText>
-          <SmallText>Please sign-in to continue!</SmallText>
-        </HeaderContainer>
-      </TopContainer>
-      <InnerContainer>
-        <LoginForm />
-        <p style={{zIndex:"20"}} onClick={playExpandingAnimation}>Click me 👌 </p>
-      </InnerContainer>
-    </BoxContainer>
+    <AccountContext.Provider value={contextValue}>
+      <BoxContainer>
+        <TopContainer>
+          <BackDrop
+            initial={false}
+            animate={isExpanded ? "expanded" : "collapsed"}
+            variants={backdropVariants}
+            transition={expandingTransition}
+          />
+          {active === "login" && (
+            <HeaderContainer>
+              <HeaderText>Welcome</HeaderText>
+              <HeaderText>Back</HeaderText>
+              <SmallText>Please log in to continue!</SmallText>
+            </HeaderContainer>
+          )}
+          {active === "register" && (
+            <HeaderContainer>
+              <HeaderText>Create</HeaderText>
+              <HeaderText>Account</HeaderText>
+              <SmallText>Please register to continue!</SmallText>
+            </HeaderContainer>
+          )}
+        </TopContainer>
+        <InnerContainer>
+          {active === "login" && <LoginForm />}
+          {active === "register" && <RegisterForm />}
+        </InnerContainer>
+      </BoxContainer>
+    </AccountContext.Provider>
   );
 }

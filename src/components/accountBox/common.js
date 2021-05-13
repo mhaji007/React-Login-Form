@@ -62,7 +62,7 @@ z-index: 11;
 export const SubmitButton = styled.button`
 z-index:11;
   width: 100%;
-  padding: 11px 40%;
+  padding: 11px 25%;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
