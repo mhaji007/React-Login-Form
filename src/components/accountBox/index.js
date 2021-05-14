@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { RegisterForm } from "./registerForm";
 
+
 import styled from "styled-components";
 
 const BoxContainer = styled.div`
@@ -59,6 +60,7 @@ export const HeaderText = styled.h2`
   color: #fff;
   z-index: 10;
   margin: 0;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 `;
 
 export const SmallText = styled.h5`
@@ -68,6 +70,7 @@ export const SmallText = styled.h5`
   /* z-index: 10; */
   margin: 0;
   margin-top: 7px;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 `;
 
 const InnerContainer = styled.div`
@@ -113,6 +116,7 @@ export function AccountBox(props) {
     }, expandingTransition.duration * 1000 - 1500);
   };
   const switchToRegister = () => {
+    console.log("switchtoregister called!!");
     playExpandingAnimation();
     setTimeout(() => {
       setActive("register");
@@ -120,6 +124,7 @@ export function AccountBox(props) {
   };
 
   const switchToLogin = () => {
+    console.log("switchtologin called!!")
     playExpandingAnimation();
     setTimeout(() => {
       setActive("login");

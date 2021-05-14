@@ -35,6 +35,7 @@ export const ForgotPasswordSubmitButton = styled.button`
 
   padding: 14px 18px;
   color: #fff;
+
   font-size: 15px;
   font-weight: 600;
   border: none;
@@ -63,15 +64,18 @@ const HeaderText = styled.h2`
   font-weight: 600;
   line-height: 1.24;
   margin: 0;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 `;
 const SmallText = styled.h4`
   font-size: 22px;
   margin-bottom: 0;
   color: #fff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 `;
 const SubText = styled.h6`
   font-size: 14px;
   color: #fff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 `;
 
 

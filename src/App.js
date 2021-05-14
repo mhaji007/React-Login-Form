@@ -6,10 +6,12 @@ import styled from "styled-components";
 import { AccountBox } from "./components/accountBox";
 import ForgotPassword from "./components/accountBox/forgotPasswordForm";
 
+import {motion} from "framer-motion"
+
 const app = "forgot"
 
 
-const AppContainer = styled.div`
+const AppContainer = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -18,14 +20,31 @@ const AppContainer = styled.div`
   justify-content: center;
   background-color: ${({ app }) => (app === "forgot" ? `#2a2a72` : `#fff`)};
 
-
-  background-image: ${({ app }) => (app === "forgot" ? "linear-gradient(315deg, #2a2a72 0%, #009ffd 74%)" : `#fff`)};
-
-
-
+  background-image: ${({ app }) =>
+    app === "forgot"
+      ? "linear-gradient(315deg, #2a2a72 0%, #009ffd 74%)"
+      : `#fff`};
 
   overflow: hidden;
 `;
+
+
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      x: "-100vw",
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 1.2 },
+      x:"0"
+    },
+    // exit: {
+    //   x: "-100vw",
+    //   transition: { ease: "easeInOut" },
+    // },
+  };
+
 
 function App() {
   const [showForgotPasswordForm, setShowForgotPasswordForm] = useState(false);
@@ -37,15 +56,34 @@ function App() {
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
           <Route path="/home">
-            <AppContainer> {/* <Home /> */}</AppContainer>
+            <AppContainer
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              // exit="exit"
+            >
+              {" "}
+              {/* <Home /> */}
+            </AppContainer>
           </Route>
           <Route path="/forgot-password">
-            <AppContainer app="forgot">
+            <AppContainer
+              app="forgot"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              // exit="exit"
+            >
               <ForgotPassword />
             </AppContainer>
           </Route>
           <Route path="/register">
-            <AppContainer>
+            <AppContainer
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              // exit="exit"
+            >
               {" "}
               <AccountBox />
             </AppContainer>
