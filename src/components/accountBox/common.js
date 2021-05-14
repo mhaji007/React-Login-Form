@@ -16,8 +16,6 @@ export const FormContainer = styled.form`
   /* box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19); */
 `;
 
-
-
 export const MutedLink = styled.a`
   z-index: 11;
   font-size: 11px;
@@ -25,7 +23,6 @@ export const MutedLink = styled.a`
   font-weight: 500;
   text-decoration: none;
 `;
-
 
 export const BoldLink = styled.a`
   z-index: 11;
@@ -35,7 +32,6 @@ export const BoldLink = styled.a`
   text-decoration: none;
   margin: 0 4px;
 `;
-
 
 export const Input = styled.input`
   z-index: 11;
@@ -64,8 +60,11 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-z-index:11;
+  z-index: 11;
   width: 100%;
+  white-space: nowrap;
+  max-width: 200px;
+  min-width: 100px;
   padding: 11px 25%;
   color: #fff;
   font-size: 15px;
@@ -74,27 +73,23 @@ z-index:11;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
   transition: all, 240ms ease-in-out;
-background-color: #2a2a72;
-    background-image: linear-gradient(
-315deg
-,#2a2a72 0%,#08679f);
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #08679f);
 
   &:hover {
     filter: brightness(1.03);
   }
 `;
 
-
 export const errorMessageContainer = styled.div`
-  background-color: #dc3545;
-  width: 100%;
-  height: 42px;
-  border-radius:2rem;
+  background-color: ${({ type }) =>
+    type && type === "error" ? ` #dc3545` : `#28a745`};
 
-`;
-export const successMessageContainer = styled.div`
-  background-color: #28a745;
   width: 100%;
   height: 42px;
   border-radius: 2rem;
+
+  h6 {
+    padding: 0.1rem;
+  }
 `;

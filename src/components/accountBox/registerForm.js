@@ -9,6 +9,7 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
+import axios from "axios"
 
 export function RegisterForm(props) {
   const [state, setState] = useState({
@@ -29,9 +30,41 @@ export function RegisterForm(props) {
       [name]: e.target.value,
     });
   };
-  console.log("name==>", name);
-  console.log("password==>", password);
-  console.log("email==>", email);
+
+  const handleSubmit = (e) => {
+        e.preventDefault();
+        setState({ ...state, buttonText: "Signing up..." });
+        register();
+  }
+
+
+    const register = async () => {
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_API}/signup`,
+          {
+            name,
+            email,
+            password,
+          }
+        );
+        setState({
+          ...state,
+          name: "",
+          email: "",
+          password: "",
+          buttonText: "Signed up",
+          success: response.data.message,
+        });
+      } catch (error) {
+        console.log(error);
+        setState({
+          ...state,
+          buttonText: "Sign up",
+          error: error.response.data.error,
+        });
+      }
+    };
 
   return (
     <BoxContainer>
@@ -56,7 +89,7 @@ export function RegisterForm(props) {
         />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
-      <MutedLink href="#">Forgot your password?</MutedLink>
+      <MutedLink href="/forgot-password">Forgot your password?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
       <SubmitButton type="submit">Register</SubmitButton>
       <Marginer direction="vertical" margin="1em" />

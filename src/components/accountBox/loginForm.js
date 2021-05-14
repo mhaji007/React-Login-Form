@@ -9,11 +9,15 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
+import {authenticate} from "../helpers/auth";
+import axios from "axios"
+
 
 export function LoginForm(props) {
   const [state, setState] = useState({
     email: "",
     password: "",
+    buttonText:"",
     error: "",
     success: "",
   });
@@ -21,15 +25,57 @@ export function LoginForm(props) {
 
   const { email, password, error, success } = state;
 
-  const handleSubmit = () => {
-    console.log("Submitting...");
-  };
-
   const handleChange = (name) => (e) => {
-    setState({ [name]: e.target.value });
+       setState({
+         ...state,
+         error: "",
+         success: "",
+         [name]: e.target.value,
+       });
 
 
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setState({ ...state, loading: true, buttonText: "Logging in..." });
+    login();
+  };
+
+    const login = async () => {
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_API}/login`,
+          {
+            email,
+            password,
+          }
+        );
+        authenticate(response.data, () => {
+          setState({
+            ...state,
+            email: "",
+            password: "",
+            buttonText: "Logged in",
+            success: response.data.message,
+            loading: false,
+            redirectToReferer: true,
+          });
+        });
+      } catch (error) {
+        console.log(error);
+        setState({
+          ...state,
+          buttonText: "Login",
+          error: error.response.data.error,
+          loading: false,
+        });
+      }
+    };
+
+
+
+
+
   const containerVariants = {
     hidden: {
       opacity: 0,

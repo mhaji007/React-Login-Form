@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+import { forgotPassword } from "../../components/helpers/auth";
 
 
 
@@ -87,11 +88,34 @@ height: 80px;
 margin-bottom:15px;
 `
 
-const handleSubmit = () => {
-  console.log("Submitting...");
-};
+
+
+
+
+
+
+
 
  function ForgotPasswordForm(props) {
+
+  const [state, setState] = useState({email:"", success:"", error:""})
+
+    const { email, success, error } = state;
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log("email from ForgotPassWordForm ===>", email);
+      setState({ success: "", error: "" });
+      forgotPassword(email).then((data) => {
+        if (data.error) {
+          console.log(data.error);
+          setState({ error: data.error });
+        } else {
+          console.log(data.message);
+          setState({ success: data.message });
+        }
+      });
+    };
 
 
   return (
@@ -105,7 +129,18 @@ const handleSubmit = () => {
       </HeaderContainer>
 
       <ForgotPasswordFormContainer>
-        <ForgotPasswordInput type="email" placeholder="Email" />
+        <ForgotPasswordInput
+          type="email"
+          placeholder="Email"
+          onChange={(e) =>
+            setState({
+              email: e.target.value,
+              success: "",
+              error: "",
+            })
+          }
+          autoFocus
+        />
       </ForgotPasswordFormContainer>
       <Marginer direction="vertical" margin={10} />
       <Marginer direction="vertical" margin="1.6em" />
