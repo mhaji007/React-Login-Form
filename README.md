@@ -1,4 +1,4 @@
-# A registration login component with full backend/frontend validation and authentication
+# Registration/Login components with full backend/frontend validation and authentication
 
 
 ## Registration Validation
